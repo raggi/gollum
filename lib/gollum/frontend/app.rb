@@ -61,7 +61,7 @@ module Precious
 
       wiki.update_page(page, name, format, params[:content], commit_message)
 
-      redirect "/#{CGI.escape(Gollum::Page.cname(name))}"
+      redirect "/#{Rack::Utils.escape(Gollum::Page.cname(name))}"
     end
 
     post '/create/*' do
@@ -72,7 +72,7 @@ module Precious
 
       begin
         wiki.write_page(name, format, params[:content], commit_message)
-        redirect "/#{CGI.escape(name)}"
+        redirect "/#{Rack::Utils.escape(name)}"
       rescue Gollum::DuplicatePageError => e
         @message = "Duplicate page: #{e.message}"
         mustache :error
@@ -98,10 +98,10 @@ module Precious
     post '/compare/:name' do
       @versions = params[:versions] || []
       if @versions.size < 2
-        redirect "/history/#{CGI.escape(params[:name])}"
+        redirect "/history/#{Rack::Utils.escape(params[:name])}"
       else
         redirect "/compare/%s/%s...%s" % [
-          CGI.escape(params[:name]),
+          Rack::Utils.escape(params[:name]),
           @versions.last,
           @versions.first]
       end

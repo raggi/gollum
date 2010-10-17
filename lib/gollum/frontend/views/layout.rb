@@ -9,7 +9,7 @@ module Precious
       attr_reader :name
 
       def escaped_name
-        CGI.escape(@name)
+        Rack::Utils.escape(@name)
       end
 
       def title
