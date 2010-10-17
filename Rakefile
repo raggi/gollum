@@ -47,9 +47,11 @@ task :default => :test
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test' << '.'
+  test.ruby_opts << '-rubygems'
+  test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
+  test.warning = true
 end
 
 desc "Generate RCov test coverage and open in your browser"

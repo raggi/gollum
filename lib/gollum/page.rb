@@ -56,6 +56,8 @@ module Gollum
     def initialize(wiki)
       @wiki = wiki
       @blob = nil
+      @version = nil
+      @historical = nil
     end
 
     # Public: The on-disk filename of the page including extension.
@@ -204,7 +206,7 @@ module Gollum
     #
     # Returns true if the page is pulled from a named branch or tag, or false.
     def historical?
-      !!@historical
+      @historical
     end
 
     #########################################################################

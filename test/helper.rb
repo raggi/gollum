@@ -1,18 +1,14 @@
-require 'rubygems'
+gem 'test-unit' if defined?(gem) # required for non-stdlib test-unit
 require 'test/unit'
 require 'shoulda'
 require 'mocha'
 require 'fileutils'
 
-dir = File.dirname(File.expand_path(__FILE__))
-$LOAD_PATH.unshift(File.join(dir, '..', 'lib'))
-$LOAD_PATH.unshift(dir)
-
 require 'gollum'
 
 # Make sure we're in the test dir, the tests expect that to be the current
 # directory.
-TEST_DIR = File.join(File.dirname(__FILE__), *%w[.])
+TEST_DIR = File.expand_path('..', __FILE__)
 
 def testpath(path)
   File.join(TEST_DIR, path)
@@ -40,5 +36,5 @@ def context(*args, &block)
     def self.teardown(&block) define_method(:teardown, &block) end
   end
   (class << klass; self end).send(:define_method, :name) { name.gsub(/\W/,'_') }
-  klass.class_eval &block
+  klass.class_eval(&block)
 end

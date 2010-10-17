@@ -267,7 +267,7 @@ module Gollum
         nil
       end
       if tag && no_follow
-        tag.sub! /^<a/, '<a ref="nofollow"'
+        tag.sub! %r/^<a/, '<a ref="nofollow"'
       end
       tag
     end
@@ -299,7 +299,7 @@ module Gollum
         %{<a class="internal #{presence}" href="#{link}#{extra}">#{name}</a>}
       end
       if tag && no_follow
-        tag.sub! /^<a/, '<a ref="nofollow"'
+        tag.sub! %r/^<a/, '<a ref="nofollow"'
       end
       tag
     end
