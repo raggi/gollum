@@ -12,7 +12,7 @@ module Gollum
       @wiki    = page.wiki
       @name    = page.filename
       @data    = page.raw_data
-      @version = page.version.id
+      @version = page.version && page.version.id
       @dir     = ::File.dirname(page.path)
       @tagmap  = {}
       @codemap = {}
